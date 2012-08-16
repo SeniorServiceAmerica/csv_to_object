@@ -8,18 +8,18 @@ module CsvToObject
       @input = input
     end
     
-    def output
-      output = []
+    def to_objects
+      objects = []
       CSV.table(@input).each do |row|
-        output << new_object(row.to_hash)
+        objects << new_object(row.to_hash)
       end
-      output
+      objects
     end
     
     private
         
     def new_object(attrs)
-      @object ? @object.new : object_to_create().new
+      @object ? @object.new(attrs) : object_to_create().new(attrs)
     end
     
     def object_to_create()

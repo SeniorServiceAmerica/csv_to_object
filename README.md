@@ -1,6 +1,6 @@
 # CsvToObject
 
-TODO: Write a gem description
+Given a CSV file, will return a collection of objects. The csv file name must match the name of an object the gem can instantiate. The first line of the csv file must define attribute names. The following lines contain the data that will be assigned to those attributes
 
 ## Installation
 
@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Given a file person.csv with the contents
+
+  `id,first_name,last_name`  
+  `0,Lindsey,Austino`  
+  `1,Dodie,Egnor`
+
+  `CsvToObject::CsvToObject.new(File.open('person.csv')).to_objects` will return 
+
+  `[#<Person:0x000001021a8148 @id=0, @first_name="Lindsey", @last_name="Austino">, #<Person:0x000001021a8030 @id=1, @first_name="Dodie", @last_name="Egnor">`]
 
 ## Contributing
 
