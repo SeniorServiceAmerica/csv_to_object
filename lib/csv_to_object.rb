@@ -11,20 +11,16 @@ module CsvToObject
     end
     
     def output
-      @output = @csv.read
-      define_attributes
-      @output.each_with_index do |x,i|
-        @output[i] = new_object({:id =>"0", :first_name => 'Lindsey', :last_name => 'Austino'})
+      table = CSV.table(@input)
+      @output = []
+      table.each do |row|
+        @output << new_object(row.to_hash)
       end
       @output
     end
     
     private
-    
-    def define_attributes
-      @attributes = @output.shift
-    end
-    
+        
     def new_object(attrs)
       @object ? @object.new : object_to_create().new
     end

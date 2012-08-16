@@ -27,14 +27,9 @@ describe CsvToObject do
   end
   
   it "instantiate objects defined by its source file name and pass in a data line as a hash to the object it creates" do
-    expected_results = CSV.new(File.open(@test_csv_path)).read
-    attributes = expected_results.shift
-    expected_results.each do |x|
-      object_attributes = {}
-      attributes.each_with_index do |a,i|
-        object_attributes[a.to_sym] = x[i]
-      end
-      @c2o.should_receive(:new_object).with(object_attributes)
+    expected_paramaters = CSV.table(File.open(@test_csv_path))
+    expected_paramaters.each do |x|
+      @c2o.should_receive(:new_object).with(x.to_hash)
     end
     @c2o.output
   end
