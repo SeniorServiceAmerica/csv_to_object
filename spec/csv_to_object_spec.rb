@@ -8,12 +8,7 @@ describe CsvToObject do
     @source_file = File.open(@test_csv_path)
     @c2o = CsvToObject::CsvToObject.new(File.open(@test_csv_path))
   end
-    
-  it "creates a csv object from the source file" do
-    @c2o.csv.class.should == CSV.new(@source_file).class
-    @c2o.csv.path.should == CSV.new(@source_file).path
-  end
-  
+
   it "returns an array as output" do
     @c2o.output.class.should == [].class
   end
@@ -26,7 +21,7 @@ describe CsvToObject do
     @c2o.output.count.should == (@source_file.count - 1)
   end
   
-  it "instantiate objects defined by its source file name and pass in a data line as a hash to the object it creates" do
+  it "instantiate objects defined by its source file name, using the data line as parameters" do
     expected_paramaters = CSV.table(File.open(@test_csv_path))
     expected_paramaters.each do |x|
       @c2o.should_receive(:new_object).with(x.to_hash)

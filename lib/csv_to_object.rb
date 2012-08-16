@@ -3,20 +3,17 @@ require 'CSV'
 
 module CsvToObject
   class CsvToObject
-    attr_reader :csv
 
     def initialize(input)
       @input = input
-      @csv = CSV.new(@input)
     end
     
     def output
-      table = CSV.table(@input)
-      @output = []
-      table.each do |row|
-        @output << new_object(row.to_hash)
+      output = []
+      CSV.table(@input).each do |row|
+        output << new_object(row.to_hash)
       end
-      @output
+      output
     end
     
     private
@@ -27,7 +24,7 @@ module CsvToObject
     
     def object_to_create()
       class_name = File.basename(@input.path).gsub('.csv','').capitalize
-      @object = Object.const_set(class_name,Class.new)
+      @object = Object::const_get(class_name)
     end
   end
 end
