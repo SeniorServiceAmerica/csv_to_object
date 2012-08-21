@@ -4,8 +4,8 @@ require 'CSV'
 module CsvToObject
   class CsvToObject
 
-    def initialize(input)
-      @input = input
+    def initialize(input_path)
+      @input = File.open(input_path)
     end
     
     def to_objects

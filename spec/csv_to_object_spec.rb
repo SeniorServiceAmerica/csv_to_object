@@ -6,7 +6,7 @@ describe CsvToObject do
   before(:each) do
     @test_csv_path = 'test/csv/person.csv'
     @source_file = File.open(@test_csv_path)
-    @c2o = CsvToObject::CsvToObject.new(File.open(@test_csv_path))
+    @c2o = CsvToObject::CsvToObject.new(@test_csv_path)
   end
 
   it "returns an array" do
