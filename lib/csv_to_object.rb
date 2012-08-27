@@ -4,10 +4,16 @@ require 'CSV'
 module CsvToObject
   class CsvToObject
 
+    # Requires the path to the csv file.
     def initialize(input_path)
       @input = File.open(input_path)
     end
     
+    # Converts the data lines of the csv file to objects.
+    # Objects have the class of the name of the csv file.
+    # The first line of the csv file defines the attribute names for the data lines.
+    # 
+    #   person.csv => [person objects]
     def to_objects
       objects = []
       CSV.table(@input).each do |row|
