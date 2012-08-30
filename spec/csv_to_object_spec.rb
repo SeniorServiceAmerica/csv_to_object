@@ -1,6 +1,5 @@
 require 'spec_helper'
 require_relative '../test/lib/person.rb'
-require_relative '../test/lib/enrollment.rb'
 
 describe CsvToObject do
 
