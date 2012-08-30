@@ -1,11 +1,11 @@
-id,first_name,last_name
-0,Lindsey,Austino
-1,Dodie,Egnor
-2,Tommie,Mclauglin
-3,Aletha,Vettel
-4,Matilda,Osornio
-5,Robby,Kloke
-6,Forest,Neall
-7,Sherrie,Licon
-8,Elroy,Bergren
-9,Darlene,Guialdo
+id,first_name,last name,SCORE_[person_id|date]
+0,Lindsey,Austino,[0|2012-01-01]
+1,Dodie,Egnor,[0|2012-01-01]
+2,Tommie,Mclauglin,[0|2012-01-01]
+3,Aletha,Vettel,[0|2012-01-01]
+4,Matilda,Osornio,[0|2012-01-01]
+5,Robby,Kloke,[0|2012-01-01]
+6,Forest,Neall,[0|2012-01-01]
+7,Sherrie,Licon,[0|2012-01-01]
+8,Elroy,Bergren,[0|2012-01-01]
+9,Darlene,Guialdo,[0|2012-01-01]

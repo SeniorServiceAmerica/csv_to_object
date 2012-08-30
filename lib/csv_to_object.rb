@@ -12,18 +12,23 @@ module CsvToObject
     # Converts the data lines of the csv file to objects.
     # Objects have the class of the name of the csv file.
     # The first line of the csv file defines the attribute names for the data lines.
-    # 
     #   person.csv => [person objects]
+    #   attribute names are downcased and have spaces replaced with _.
+    #   attribute names are strings. 
     def to_objects
       objects = []
-      CSV.table(@input).each do |row|
+      CSV.table(@input, {header_converters: header_converter}).each do |row|
         objects << new_object(row.to_hash)
       end
       objects
     end
     
     private
-        
+    
+    def header_converter
+        lambda { |h| h.encode(CSV::ConverterEncoding).downcase.gsub(/\s+/, "_") }
+    end
+    
     def new_object(attrs)
       @object ? @object.new(attrs) : object_to_create().new(attrs)
     end

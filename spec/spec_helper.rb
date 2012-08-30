@@ -17,3 +17,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 end
+
+RSpec::Matchers.define :include_key do |expected|
+  match do |actual|
+    actual.keys.include?(expected)
+  end
+end
