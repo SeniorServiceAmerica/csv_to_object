@@ -6,7 +6,7 @@ module CsvToObject
 
     # Requires the path to the csv file.
     def initialize(input_path)
-      @input = File.open(input_path)
+      @input_path = File.open(input_path)
     end
     
     # Converts the data lines of the csv file to objects.
@@ -17,7 +17,8 @@ module CsvToObject
     #   attribute names are strings. 
     def to_objects
       objects = []
-      CSV.table(@input, {header_converters: header_converter}).each do |row|
+      file = File.open(@input_path)
+      CSV.table(file, {header_converters: header_converter}).each do |row|
         objects << new_object(row.to_hash)
       end
       objects
@@ -26,7 +27,7 @@ module CsvToObject
     private
     
     def header_converter
-        lambda { |h| h.encode(CSV::ConverterEncoding).downcase.gsub(/\s+/, "_") }
+      lambda { |h| h.encode(CSV::ConverterEncoding).downcase.gsub(/\s+/, "_") }
     end
     
     def new_object(attrs)
@@ -34,7 +35,7 @@ module CsvToObject
     end
     
     def object_to_create()
-      class_name = File.basename(@input.path).gsub('.csv','').capitalize
+      class_name = File.basename(@input_path).gsub('.csv','').capitalize
       @object = Object::const_get(class_name)
     end
   end

@@ -24,23 +24,30 @@ Given a file person.csv with the contents
   `0,Lindsey,Austino`  
   `1,Dodie,Egnor`
 
-  `CsvToObject::CsvToObject.new('[path to person.csv]').to_objects` will return 
-
-  `[#<Person:0x000001021a8148 @id=0, @first_name="Lindsey", @last_name="Austino">, #<Person:0x000001021a8030 @id=1, @first_name="Dodie", @last_name="Egnor">`]
+  ```ruby
+    csv_path = 'tmp/person.csv'
+    CsvToObject::CsvToObject.new(csv.path).to_objects
+    [#<Person:0x000001021a8148 @id=0, @first_name="Lindsey", @last_name="Austino">,
+     #<Person:0x000001021a8030 @id=1, @first_name="Dodie", @last_name="Egnor">]
+  ```
 
 ### Attribute Names
 
-When converting the first line of the csv file into attribute names, the following conversions are applied:
+CSV_to_object does not use the default header converter options. When converting the first line of the csv file into attribute names, the following conversions are applied:
 
-* Encoded using CSV::Character Encoding
+* Encoded using CSV::CharacterEncoding
 * Downcased
 * Spaces are replaced with underscores
 
 When passed to the target object.new() method, attribute names are strings, not symbols. For example, the instantiation of the Person object above would be:
 
-  `Person.new({"id" => 0, "first_name" => "Lindsey", "last_name" => "Austino"})`
+  ```ruby
+    Person.new({"id" => 0, "first_name" => "Lindsey", "last_name" => "Austino"})
+  ```
 
 So if you are looking for specific hash keys in `initialize()`, use strings not symbols.
+
+If this behavior is not desired, you could overwrite the `header_converter` method of `CsvToObject`.
 
 ## Contributing
 

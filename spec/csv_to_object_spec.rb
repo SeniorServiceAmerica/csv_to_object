@@ -35,7 +35,7 @@ describe CsvToObject do
   
   it "should use the data line to populate attributes" do
     @c2o.to_objects.first.id.should == 0    
-    @c2o.to_objects.first.first_name.should == "Lindsey"
+    @c2o.to_objects.first.first_name.should == "Billie Lindsey"
     @c2o.to_objects.first.last_name.should == "Austino"
   end
   
@@ -50,4 +50,5 @@ describe CsvToObject do
     @c2o.should_receive(:new_object).with(include_key('score_[person_id|date]')).exactly(@number_of_data_lines).times
     @c2o.to_objects
   end
+  
 end
