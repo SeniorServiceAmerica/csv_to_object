@@ -1,6 +1,6 @@
 # CsvToObject
 
-Given the path to a CSV file, will return a collection of objects. The csv file name must match the name of an object the gem can instantiate. The first line of the csv file must define attribute names. The following lines contain the data that will be assigned to those attributes
+Given the path to a CSV file, will return a collection of objects. The csv file name must match the name of an object the gem can instantiate. The first line of the csv file must define attribute names. The following lines contain the data that will be assigned to those attributes.
 
 ## Installation
 
