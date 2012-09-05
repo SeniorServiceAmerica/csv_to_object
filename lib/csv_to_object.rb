@@ -14,7 +14,7 @@ module CsvToObject
     # The first line of the csv file defines the attribute names for the data lines.
     #   person.csv => [person objects]
     #   attribute names are downcased and have spaces replaced with _.
-    #   attribute names are strings. 
+    #   attribute names are strings.
     def to_objects
       objects = []
       file = File.open(@input_path)

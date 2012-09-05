@@ -1,8 +1,14 @@
 require 'spec_helper'
-require_relative '../test/lib/person.rb'
+
+class Person
+  attr_reader :id, :first_name, :last_name
+
+  def initialize(args={})
+    @id,@first_name, @last_name = args["id"], args["first_name"],args["last_name"]
+  end
+end
 
 describe CsvToObject do
-
   before(:each) do
     @test_csv_path = 'test/csv/person.csv'
     @source_file = File.open(@test_csv_path)
@@ -27,8 +33,8 @@ describe CsvToObject do
   
   it "instantiate objects defined by its source file name, using the data line as parameters" do
     expected_paramaters = CSV.table(File.open(@test_csv_path),{header_converters: lambda { |h| h.encode(CSV::ConverterEncoding).downcase.gsub(/\s+/, "_") }})
-    expected_paramaters.each do |x|
-      @c2o.should_receive(:new_object).with(x.to_hash)
+    expected_paramaters.each do |object_attributes|
+      @c2o.should_receive(:new_object).with(object_attributes.to_hash)
     end
     @c2o.to_objects
   end
@@ -50,5 +56,4 @@ describe CsvToObject do
     @c2o.should_receive(:new_object).with(include_key('score_[person_id|date]')).exactly(@number_of_data_lines).times
     @c2o.to_objects
   end
-  
 end
