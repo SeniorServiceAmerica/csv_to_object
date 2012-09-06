@@ -1,5 +1,5 @@
 require "csv_to_object/version"
-require 'CSV'
+require 'csv'
 
 module CsvToObject
   class CsvToObject
