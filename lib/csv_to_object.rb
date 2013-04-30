@@ -19,7 +19,7 @@ module CsvToObject
     def to_objects
       objects = []
       file = File.open(@input_path)
-      CSV.table(file, {header_converters: header_converter, encoding: "ISO-8859-1"}).each do |row|
+      CSV.table(file, {header_converters: header_converter}).each do |row|
         objects << new_object(row.to_hash)
       end
       objects
