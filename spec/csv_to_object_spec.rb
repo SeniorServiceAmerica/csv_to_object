@@ -8,6 +8,16 @@ class Person
   end
 end
 
+class MultiWordClass
+  attr_reader :id, :foo
+
+  def initialize(args={})
+    @id   = args["id"]
+    @foo  = args["foo"]
+  end
+
+end
+
 describe CsvToObject do
   before(:each) do
     @test_csv_path = 'test/csv/person.csv'
@@ -25,6 +35,18 @@ describe CsvToObject do
   
   it "populates the objects array with objects defined by the source file name" do
     @c2o.to_objects.first.class.to_s.should == File.basename(@source_file.path).gsub('.csv','').capitalize
+  end
+  
+  context "given a multi_word file name in snake case" do
+    before(:each) do
+      @snake_case_file = 'test/csv/multi_word_class.csv'
+    end
+    it "it creates MultiWord objects" do
+      objects = CsvToObject::CsvToObject.new(@snake_case_file).to_objects
+      objects.each do |object|
+        object.should be_kind_of(MultiWordClass)
+      end
+    end
   end
   
   it "returns as many objects as there are data lines in the csv file" do
