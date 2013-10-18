@@ -36,8 +36,15 @@ module CsvToObject
     end
 
     def object_to_create()
-      class_name = File.basename(@input_path).gsub('.csv','').capitalize
       @object = Object::const_get(class_name)
+    end
+    
+    def class_name
+      bare_file_name.split('_').map { |word| word.capitalize}.join
+    end
+    
+    def bare_file_name
+      File.basename(@input_path).gsub('.csv','')
     end
   end
 end
